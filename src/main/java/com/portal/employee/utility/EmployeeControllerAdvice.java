@@ -8,7 +8,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class EmployeeControllerAdvice {
 
-    @ExceptionHandler
+    @ExceptionHandler(EmployeePortalException.class)
+    public ResponseEntity<String> employeePortalExceptionHandler(Exception ex){
+        return new ResponseEntity<>("Error occurred: "+ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)
     public ResponseEntity<String> generalExceptionHandler(Exception ex){
         return new ResponseEntity<>("Error occurred: "+ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }

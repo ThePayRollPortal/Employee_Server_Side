@@ -1,13 +1,50 @@
 package com.portal.employee.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.portal.employee.dto.EmployeeDTO;
+import com.portal.employee.service.EmployeeService;
+import com.portal.employee.utility.EmployeePortalException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
 @RequestMapping
 public class EmployeeController {
 
+    @Autowired
+    private EmployeeService employeeService;
+
+    @GetMapping(value = "/details/{id}")
+    public ResponseEntity<EmployeeDTO> getEmployee(@PathVariable Integer id) throws Exception {
+        EmployeeDTO emp = employeeService.getEmployee(id);
+        return new ResponseEntity<>(emp, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployees() throws Exception {
+        List<EmployeeDTO> employeeDTOS = employeeService.getAllEmployee();
+        return new ResponseEntity<>(employeeDTOS, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/details")
+    public ResponseEntity<String> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        employeeService.createEmployee(employeeDTO);
+        return new ResponseEntity<>("Created Employee with ID: " + employeeDTO.getId(), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "details/{id}")
+    public ResponseEntity<String> updateEmployee(@PathVariable Integer id, @RequestParam Double ctc) throws EmployeePortalException {
+        employeeService.updateEmployee(id, ctc);
+        return new ResponseEntity<>("Updated Employee CTC details with ID: " + id, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/details/{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable Integer id) throws EmployeePortalException {
+        employeeService.deleteEmployee(id);
+        return new ResponseEntity<>("Deleted Employee details with ID: " + id, HttpStatus.OK);
+    }
 }
