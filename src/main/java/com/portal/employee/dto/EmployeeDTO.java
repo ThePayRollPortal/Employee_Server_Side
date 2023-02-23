@@ -8,19 +8,19 @@ public class EmployeeDTO {
     private String firstName;
     private String lastName;
     private Integer age;
-    private Double CTC;
+    private Double ctc;
     private String organization;
 
     public EmployeeDTO() {
 
     }
 
-    public EmployeeDTO(Integer id, String firstName, String lastName, Integer age, Double CTC, String organization) {
+    public EmployeeDTO(Integer id, String firstName, String lastName, Integer age, Double ctc, String organization) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.CTC = CTC;
+        this.ctc = ctc;
         this.organization = organization;
     }
 
@@ -56,12 +56,12 @@ public class EmployeeDTO {
         this.age = age;
     }
 
-    public Double getCTC() {
-        return CTC;
+    public Double getCtc() {
+        return ctc;
     }
 
-    public void setCTC(Double CTC) {
-        this.CTC = CTC;
+    public void setCtc(Double ctc) {
+        this.ctc = ctc;
     }
 
     public String getOrganization() {
@@ -73,7 +73,7 @@ public class EmployeeDTO {
     }
 
     public static EmployeeDTO convertToDTO(Employee employee) {
-        return new EmployeeDTO(employee.getId(), employee.getFirstName(), employee.getLastName(), employee.getAge(), employee.getCTC(), employee.getOrganization());
+        return new EmployeeDTO(employee.getId(), employee.getFirstName(), employee.getLastName(), employee.getAge(), employee.getCtc(), employee.getOrganization());
     }
 
     @Override
@@ -83,7 +83,7 @@ public class EmployeeDTO {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
-                ", CTC=" + CTC +
+                ", CTC=" + ctc +
                 ", organization='" + organization + '\'' +
                 '}';
     }

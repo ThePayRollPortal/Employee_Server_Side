@@ -1,26 +1,30 @@
 package com.portal.employee.model;
 
 import com.portal.employee.dto.EmployeeDTO;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 public class Employee {
 
+    @Id
     private Integer id;
     private String firstName;
     private String lastName;
     private Integer age;
-    private Double CTC;
+    private Double ctc;
     private String organization;
 
     public Employee(){
 
     }
 
-    public Employee(Integer id, String firstName, String lastName, Integer age, Double CTC, String organization) {
+    public Employee(Integer id, String firstName, String lastName, Integer age, Double ctc, String organization) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.CTC = CTC;
+        this.ctc = ctc;
         this.organization = organization;
     }
 
@@ -56,12 +60,12 @@ public class Employee {
         this.age = age;
     }
 
-    public Double getCTC() {
-        return CTC;
+    public Double getCtc() {
+        return ctc;
     }
 
-    public void setCTC(Double CTC) {
-        this.CTC = CTC;
+    public void setCtc(Double ctc) {
+        this.ctc = ctc;
     }
 
     public String getOrganization() {
@@ -73,7 +77,7 @@ public class Employee {
     }
 
     public static Employee convertToEntity(EmployeeDTO employeeDTO) {
-        return new Employee(employeeDTO.getId(), employeeDTO.getFirstName(), employeeDTO.getLastName(), employeeDTO.getAge(), employeeDTO.getCTC(), employeeDTO.getOrganization());
+        return new Employee(employeeDTO.getId(), employeeDTO.getFirstName(), employeeDTO.getLastName(), employeeDTO.getAge(), employeeDTO.getCtc(), employeeDTO.getOrganization());
     }
 
 }
