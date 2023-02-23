@@ -1,7 +1,7 @@
 package com.portal.employee.controller;
 
 import com.portal.employee.dto.EmployeeDTO;
-import com.portal.employee.service.EmployeeService;
+import com.portal.employee.service.IEmployeeService;
 import com.portal.employee.utility.EmployeePortalException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeService employeeService;
+    private IEmployeeService employeeService;
 
     @GetMapping(value = "/details/{id}")
     public ResponseEntity<EmployeeDTO> getEmployee(@PathVariable Integer id) throws Exception {
