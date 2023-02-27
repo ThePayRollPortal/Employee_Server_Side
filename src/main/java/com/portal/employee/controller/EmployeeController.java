@@ -2,6 +2,7 @@ package com.portal.employee.controller;
 
 import com.portal.employee.dto.EmployeeDTO;
 import com.portal.employee.service.IEmployeeService;
+import com.portal.employee.service.Producer;
 import com.portal.employee.utility.EmployeePortalException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,9 @@ public class EmployeeController {
 
     @Autowired
     private IEmployeeService employeeService;
+
+    @Autowired
+    private Producer producer;
 
     @GetMapping(value = "/details/{id}")
     public ResponseEntity<EmployeeDTO> getEmployee(@PathVariable Integer id) throws Exception {
@@ -39,6 +43,7 @@ public class EmployeeController {
     @PutMapping(value = "details/{id}")
     public ResponseEntity<String> updateEmployee(@PathVariable Integer id, @RequestParam Double ctc) throws EmployeePortalException {
         employeeService.updateEmployee(id, ctc);
+        producer.sendMessage("Employee CTC updated");
         return new ResponseEntity<>("Updated Employee CTC details with ID: " + id, HttpStatus.OK);
     }
 
