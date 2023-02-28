@@ -2,7 +2,7 @@ package com.portal.employee.service;
 
 import com.portal.employee.dto.EmployeeDTO;
 import com.portal.employee.model.Employee;
-import com.portal.employee.repository.EmployeeRepository;
+import com.portal.employee.repository.IEmployeeRepository;
 import com.portal.employee.utility.EmployeePortalException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class EmployeeService implements IEmployeeService {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private IEmployeeRepository employeeRepository;
 
     public EmployeeDTO getEmployee(Integer id) throws EmployeePortalException {
         Optional<Employee> opt = employeeRepository.findById(id);

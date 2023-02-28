@@ -43,7 +43,7 @@ public class EmployeeController {
     @PutMapping(value = "details/{id}")
     public ResponseEntity<String> updateEmployee(@PathVariable Integer id, @RequestParam Double ctc) throws EmployeePortalException {
         employeeService.updateEmployee(id, ctc);
-        producer.sendMessage("Employee CTC updated");
+        producer.sendMessage("CTC updated to :" + ctc + ": for the employee with employee ID:" + id);
         return new ResponseEntity<>("Updated Employee CTC details with ID: " + id, HttpStatus.OK);
     }
 
